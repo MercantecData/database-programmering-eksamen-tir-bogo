@@ -15,6 +15,7 @@ if(!isset($_SESSION['adminID']))
             <center><h1>Admin panel</h1></center>
             <li><a href="imageList.php">Controle Images</a></li>
             <li><a href="userlist.php">Controle Users</a></li>
+            <li><a href="newUser.php">Create user</a></li>
             <li><a href="logout.php">Log out</a></li>
         </ul>
     </body>

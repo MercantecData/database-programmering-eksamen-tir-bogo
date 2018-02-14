@@ -5,13 +5,18 @@ require('../connect.php');
 if(isset($_POST["username"]) && isset($_POST['password'])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $sql = "SELECT id FROM adminusers WHERE username = '$username' AND password = '$password'";
+    $sql = "SELECT * FROM adminusers WHERE username = '$username'";
     $result = $conn->query($sql);
     if($result->num_rows > 0) {
         session_start();
-        $_SESSION["adminID"] = $result->fetch_assoc()["id"];
-        header("Location: index.php");
-        exit;
+        while($row = $result->fetch_assoc()){
+            if(password_verify($password, $row['password']))
+            {
+                $_SESSION["adminID"] = $row["id"];
+                header("Location: index.php");
+                exit;
+            }
+        }
     } else {
         echo "<p style='color:red'>Wrong Username/Password</p>";
     }
