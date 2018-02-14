@@ -1,11 +1,14 @@
 <?php
-//On page load
-$conn = mysqli_connect("localhost", "root", "", "DatabaseExam");
+require("../connect.php");
 
-//delete variable is set
-if(isset($_GET['deleteuser']))
+session_start();
+if(!isset($_SESSION['adminID'])){
+    header("location: index.php");
+}
+
+if(isset($_GET['delete']))
 {
-    $deleteUserId = $_GET['deleteuser'];
+    $deleteUserId = $_GET['delete'];
     $deleteStatement = "DELETE FROM users WHERE id =".$deleteUserId;
     $deleteImages = "DELETE FROM images WHERE owner = $deleteUserId";
     if($conn->query($deleteImages) == TRUE){
@@ -23,25 +26,11 @@ if(isset($_GET['deleteuser']))
 }
 
 //delete images from database
-if(isset($_GET['deleteImage']))
-{
-    $imageId= $_GET['deleteImage'];
-    $deleteImageById= $deleteImages = "DELETE FROM images WHERE id = $imageId";
-    if($conn->query($deleteImageById))
-    {
-        echo "Image deleted";
-    }
-    else 
-    {
-        $conn->error;
-    }
-    
-}
 
 $sql = "SELECT id, username, name FROM users WHERE 1";
-$sqlImages = "SELECT * FROM images;";
 $result = $conn->query($sql);
-$resultImage = $conn->query($sqlImages);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -72,25 +61,6 @@ $resultImage = $conn->query($sqlImages);
             ?>
         </table>
         
-        <h1>Images:</h1>
-        <table style="width:100%; border: 1px solid black;text-align:center;">
-            <tr>
-                <th>id</th>
-                <th>Image</th>
-                <th>Owner</th>
-                <th>Delete</th>
-            </tr>
-
-            <?php 
-            while($row = $resultImage->fetch_assoc()){
-                echo "<tr>";
-                echo "<td>".$row["id"]."</td>";
-                echo "<td><img width='200' height='200' src='".$row['imageURL']."'></td>";
-                echo "<td>".$row['owner']."</td>";
-                echo "<td><a href='?deleteImage=".$row["id"]."'>Delete</a></td>";
-                echo "</tr>";
-            }
-            ?>
-        </table>
+        
     </body>
 </html>
