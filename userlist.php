@@ -1,5 +1,22 @@
 <?php
+//On page load
 $conn = mysqli_connect("localhost", "root", "", "DatabaseExam");
+
+
+//delete variable is set
+if(isset($_GET['delete']))
+{
+    echo "ok";
+    $deleteUserId = $_GET['delete'];
+    $deleteStatement = "DELETE FROM users WHERE id =".$deleteUserId;
+    if($conn->query($deleteStatement) == TRUE){
+        echo "User deleted";
+    }
+    else {
+        echo $conn->error;
+    }
+}
+
 $sql = "SELECT id, username, name FROM users WHERE 1";
 $result = $conn->query($sql);
 ?>
@@ -19,7 +36,7 @@ $result = $conn->query($sql);
                 <th>Name</th>
                 <th>Delete</th>
             </tr>
-            
+
             <?php 
             while($row = $result->fetch_assoc()){
                 echo "<tr>";
