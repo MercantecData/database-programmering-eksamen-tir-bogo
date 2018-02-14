@@ -1,9 +1,9 @@
 <?php
+require("connect.php");
 session_start();
 $loggedIn = isset($_SESSION['userID']);
 if($loggedIn) {
 	$id = $_SESSION['userID'];
-	$conn = mysqli_connect("localhost", "root", "", "databaseexam");
 	$sql = "SELECT id, imageURL FROM images WHERE owner = $id";
 	$imageresult = $conn->query($sql);
 }
