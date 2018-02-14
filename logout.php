@@ -1,6 +1,8 @@
 <?php
-if(isset($_POST["submit"])) {
-	sessionstart();
+session_start();
+if(isset($_SESSION["userID"])) {
 	session_unset();
-	header("Location: index.php");
+    session_destroy();
 }
+//Navigate to index nomather what
+header("Location: index.php");

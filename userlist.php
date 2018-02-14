@@ -6,14 +6,20 @@ $conn = mysqli_connect("localhost", "root", "", "DatabaseExam");
 //delete variable is set
 if(isset($_GET['delete']))
 {
-    echo "ok";
     $deleteUserId = $_GET['delete'];
     $deleteStatement = "DELETE FROM users WHERE id =".$deleteUserId;
-    if($conn->query($deleteStatement) == TRUE){
-        echo "User deleted";
+    $deleteImages = "DELETE FROM images WHERE owner = $deleteUserId";
+    if($conn->query($deleteImages) == TRUE){
+        echo "Images attached to user is deleted<br>";
+        if($conn->query($deleteStatement) == TRUE) {
+            echo "User deleted";
+        }
+        else {
+            $conn->error;        }
     }
     else {
         echo $conn->error;
+
     }
 }
 
