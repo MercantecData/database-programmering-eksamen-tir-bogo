@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 13. 02 2018 kl. 15:40:36
--- Serverversion: 10.1.26-MariaDB
--- PHP-version: 7.1.9
+-- Genereringstid: 14. 02 2018 kl. 11:14:44
+-- Serverversion: 10.1.28-MariaDB
+-- PHP-version: 5.6.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -31,15 +31,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `adminusers` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `name` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Data dump for tabellen `adminusers`
 --
 
-INSERT INTO `adminusers` (`id`, `username`, `password`) VALUES
-(1, 'admin', 'admin');
+INSERT INTO `adminusers` (`id`, `username`, `password`, `name`) VALUES
+(1, 'admin', 'admin', ''),
+(2, '', '$1$pA0.8D3.$HGRkhzC9VUcKKEEgLMIsv/', ''),
+(3, 'a', '$1$Ls3.262.$cMz2pZLikX2hnPCRZSEFL.', 'a'),
+(4, 'a', '$2y$10$xvWt3n66r8E2MGSeAsaGK.eGRnkM3Q1X6cb2sHQUgqYyRvBqSs9u2', 'a'),
+(5, 'to', '$2y$10$n6njYApkCGNMXFwzcfXOO.VDQBi6bQnYADuyYSrimsZT3MNi/VgeC', 'to');
 
 -- --------------------------------------------------------
 
@@ -58,13 +63,9 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `imageURL`, `owner`) VALUES
-(1, 'https://imgix.ranker.com/user_node_img/50047/1000931305/original/x-wing-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces', 1),
-(2, 'https://imgix.ranker.com/user_node_img/50047/1000931279/original/millennium-falcon-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces', 1),
-(3, 'https://imgix.ranker.com/user_node_img/50047/1000931306/original/vader-and-39-s-tie-fighter-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces', 1),
-(4, 'https://imgix.ranker.com/user_node_img/50047/1000931297/original/star-destroyer-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces', 1),
-(5, 'https://imgix.ranker.com/user_node_img/50047/1000931296/original/slave-i-photo-u1?w=650&q=60&fm=jpg&fit=crop&crop=faces', 1),
-(6, 'http://static.tvtropes.org/pmwiki/pub/images/friendship_is_magic_newpageimage_1684.png', 2),
-(7, 'https://vignette.wikia.nocookie.net/mugen/images/1/13/Fluttershy_artwork.png/revision/latest?cb=20130311003323', 2);
+(2, 'https://imgix.ranker.com/user_node_img/50047/1000931279/original/millennium-falcon-photo-u1?w=650&q=50&fm=jpg&fit=crop&crop=faces', 8),
+(6, 'http://static.tvtropes.org/pmwiki/pub/images/friendship_is_magic_newpageimage_1684.png', 8),
+(7, 'https://vignette.wikia.nocookie.net/mugen/images/1/13/Fluttershy_artwork.png/revision/latest?cb=20130311003323', 8);
 
 -- --------------------------------------------------------
 
@@ -75,7 +76,7 @@ INSERT INTO `images` (`id`, `imageURL`, `owner`) VALUES
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(120) NOT NULL,
   `name` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -84,8 +85,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `name`) VALUES
-(1, 'kyloren', 'darth4ever', 'Ben Solo'),
-(2, 'fShy34', 'friendshipism4gic', 'Fluttershy');
+(2, 'fShy34', 'friendshipism4gic', 'Fluttershy'),
+(6, 'as', '$1$vY4.MV5.$6w70C1B8o7FcCxldOb7/', 'tobia'),
+(8, 'to', '$2y$10$mOipbre3mXgFmt7V0PB5r.WnGOLgVZjGkDC2x5tHkcDswTEMvLjs2', 'to');
 
 --
 -- Begrænsninger for dumpede tabeller
@@ -118,19 +120,19 @@ ALTER TABLE `users`
 -- Tilføj AUTO_INCREMENT i tabel `adminusers`
 --
 ALTER TABLE `adminusers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Begrænsninger for dumpede tabeller
