@@ -26,7 +26,7 @@ $result = $conn->query($sql);
                 echo "<td>".$row["id"]."</td>";
                 echo "<td>".$row['username']."</td>";
                 echo "<td>".$row['name']."</td>";
-                echo "<td><a href='?'>Delete</a></td>";
+                echo "<td><a href='?delete=".$row["id"]."'>Delete</a></td>";
                 echo "</tr>";
             }
             ?>
